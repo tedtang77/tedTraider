@@ -23,7 +23,7 @@ createServer = function createServer(){
         secret: "my secret sign key", 
         store: new MongoStore({
             db: 'traderioSessions'
-        });
+        })
     }));
     
 
