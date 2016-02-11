@@ -14,9 +14,9 @@ createServer = function createServer(){
     
     var server = express();
     //specify middleware
-    server.use(express.static(__dirname + '/public');
-    server.use("/product/*", express.static(__dirname + '/public');
-    server.use("/basket/", express.static(__dirname + '/public');
+    server.use(express.static(__dirname + '/public'));
+    server.use("/product/*", express.static(__dirname + '/public'));
+    server.use("/basket/", express.static(__dirname + '/public'));
 
     server.use(cookieParser);
     server.use(expressSession({
