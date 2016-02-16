@@ -1,5 +1,3 @@
-/usr/bin/env node
-
 var express = require('express'),
     cookieParser = require('cookie-parser'),
     expressSession = require('express-session');
