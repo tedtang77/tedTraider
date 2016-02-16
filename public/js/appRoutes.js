@@ -18,8 +18,3 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider',
         $locationProvider.html5Mode(true);
     }
 ]);
-
-// IMPORTANT LEARNING
-// Angular module
-// https://docs.angularjs.org/api/ng/function/angular.module
-// configure existing services inside initialization blocks.

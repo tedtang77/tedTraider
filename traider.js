@@ -18,7 +18,7 @@ createServer = function createServer(){
 
     server.use(cookieParser);
     server.use(expressSession({
-        secret: "my secret sign key", 
+        secret: 'my secret key',
         store: new MongoStore({
             db: 'traderioSessions'
         })
