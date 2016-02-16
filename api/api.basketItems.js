@@ -21,7 +21,7 @@ var addItem = function(req, res) {
 
     var productId = req.params.productId;
 
-    var client = requestJson.newClient('http://127.0.0.1:5000/');
+    var client = requestJson.createClient('http://127.0.0.1:5000/');
 
     client.get('api/products/' + productId, function(err, result, data) {
         if (err) {

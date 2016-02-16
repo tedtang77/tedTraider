@@ -28,7 +28,7 @@ createServer = function createServer(){
     
 
     //attach router handlers
-    reutes.attachHandlers(server);
+    routes.attachHandlers(server);
 
     return server;
 };
@@ -39,3 +39,5 @@ var port = Number(process.env.PORT || 8080);
 server.listen(port, function(){
     console.log("Listening on "+ port);
 });
+// TODO: to switch into HTTPS protocol instead before production deployment
+// TODO: to add Login
