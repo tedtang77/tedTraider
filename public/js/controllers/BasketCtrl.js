@@ -11,3 +11,5 @@ angular.module('BasketCtrl', []).controller('BasketController', function($scope,
 
     //$scope.$on('basketUpdate', function(event, args) {alert('caught');});
 });
+
+
