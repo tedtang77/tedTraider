@@ -15,13 +15,16 @@ createServer = function createServer(){
     server.use(express.static(__dirname + '/public'));
     server.use("/product/*", express.static(__dirname + '/public'));
     server.use("/basket/", express.static(__dirname + '/public'));
+    //server.use("/admin/", express.static(__dirname + '/public/admin'));
 
     server.use(cookieParser);
     server.use(expressSession({
-        secret: 'my secret key',
+        secret: 'ABCDEFGHIGJLMNOPQRSTUVWXYZ27312777',
         store: new MongoStore({
-            db: 'traderioSessions'
-        })
+            db: 'traiderioSessions'
+        }),
+        resave: true,
+        saveUninitialized: true
     }));
     
 

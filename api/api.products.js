@@ -16,6 +16,7 @@ function list(req, res) {
 }
 
 function seed(req, res) {
+    console.log("Seed Input!");
     db.insert({
         "name": "Horse",
         "description": "A lovely horse",
