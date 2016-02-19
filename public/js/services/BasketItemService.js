@@ -19,12 +19,11 @@ angular.module('BasketItemService', []).factory('BasketItems', ['$http', '$rootS
                 caller.broadcastItemCount();
                 callback(data);
             }).error(function() {
-                alert("error");
+                alert("BasketItemService getAll error");
             });
         };
 
         basketService.addOne = function(id, callback) {
-
             caller = this;
             $http({
                 method: 'get',

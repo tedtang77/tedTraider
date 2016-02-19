@@ -6,7 +6,10 @@
         "offers": {
             "price": 59.99,
             "stock": 10
-        }
+        },
+        "id": "horse1",
+        "imageUrl": "img/phones/motorola-atrix-4g.0.jpg",
+        "review": 5
     },
     {
         "name": "Cow",
@@ -15,16 +18,22 @@
         "offers": {
             "price": 59.99,
             "stock": 10
-        }
+        },
+        "id": "cow1",
+        "imageUrl": "img/phones/t-mobile-g2.0.jpg",
+        "review": 3
     },
     {
         "name": "cat",
         "description": "A lovely cat",
         "minPrice": 19.99,
         "offers": {
-            "price": 19.99,
+            "price": 39.99,
             "stock": 10
-        }
+        },
+        "id": "cat2",
+        "imageUrl": "img/phones/motorola-atrix-4g.0.jpg",
+        "review": 4
     }, 
     {
         "name": "dog",
@@ -33,7 +42,10 @@
         "offers": {
             "price": 19.99,
             "stock": 10
-        }
+        },
+        "id": "dog1",
+        "imageUrl": "img/phones/motorola-atrix-4g.0.jpg",
+        "review": 1
     }, 
     {
         "name": "mouse",
@@ -41,6 +53,121 @@
         "minPrice": 19.99,
         "offers": {
             "price": 19.99,
+            "stock": 10
+        },
+        "id": "mouse8",
+        "imageUrl": "img/phones/t-mobile-g2.0.jpg",
+        "review": 4
+    },
+    {
+        "age": 0,
+        "id": "motorola-xoom-with-wi-fi",
+        "imageUrl": "img/phones/motorola-xoom-with-wi-fi.0.jpg",
+        "name": "Motorola XOOM\u2122 with Wi-Fi",
+        "description": "The Next, Next Generation\r\n\r\nExperience the future with Motorola XOOM with Wi-Fi, the world's first tablet powered by Android 3.0 (Honeycomb).",
+        "minPrice": 129.99,
+        "offers": {
+            "price": 229.99,
+            "stock": 10
+        }
+    },
+    {
+        "age": 1,
+        "id": "motorola-xoom",
+        "imageUrl": "img/phones/motorola-xoom.0.jpg",
+        "name": "MOTOROLA XOOM\u2122",
+        "description": "The Next, Next Generation\n\nExperience the future with MOTOROLA XOOM, the world's first tablet powered by Android 3.0 (Honeycomb).",
+        "minPrice": 129.99,
+        "offers": {
+            "price": 229.99,
+            "stock": 10
+        }
+    },
+    {
+        "age": 2,
+        "carrier": "AT&T",
+        "id": "motorola-atrix-4g",
+        "imageUrl": "img/phones/motorola-atrix-4g.0.jpg",
+        "name": "MOTOROLA ATRIX\u2122 4G",
+        "description": "MOTOROLA ATRIX 4G the world's most powerful smartphone.",
+        "minPrice": 129.99,
+        "offers": {
+            "price": 229.99,
+            "stock": 10
+        }
+    },
+    {
+        "age": 3,
+        "id": "dell-streak-7",
+        "imageUrl": "img/phones/dell-streak-7.0.jpg",
+        "name": "Dell Streak 7",
+        "description": "Introducing Dell\u2122 Streak 7. Share photos, videos and movies together. It\u2019s small enough to carry around, big enough to gather around.",
+        "minPrice": 129.99,
+        "offers": {
+            "price": 229.99,
+            "stock": 10
+        }
+    },
+    {
+        "age": 4,
+        "carrier": "Cellular South",
+        "id": "samsung-gem",
+        "imageUrl": "img/phones/samsung-gem.0.jpg",
+        "name": "Samsung Gem\u2122",
+        "description": "The Samsung Gem\u2122 brings you everything that you would expect and more from a touch display smart phone \u2013 more apps, more features and a more affordable price.",
+        "minPrice": 129.99,
+        "offers": {
+            "price": 229.99,
+            "stock": 10
+        }
+    },
+    {
+        "age": 5,
+        "carrier": "Dell",
+        "id": "dell-venue",
+        "imageUrl": "img/phones/dell-venue.0.jpg",
+        "name": "Dell Venue",
+        "description": "The Dell Venue; Your Personal Express Lane to Everything",
+        "minPrice": 129.99,
+        "offers": {
+            "price": 229.99,
+            "stock": 10
+        }
+    },
+    {
+        "carrier": "Best Buy",
+        "id": "nexus-s",
+        "imageUrl": "img/phones/nexus-s.0.jpg",
+        "name": "Nexus S",
+        "description": "Fast just got faster with Nexus S. A pure Google experience, Nexus S is the first phone to run Gingerbread (Android 2.3), the fastest version of Android yet.",
+        "minPrice": 129.99,
+        "offers": {
+            "price": 229.99,
+            "stock": 10
+        }
+    },
+    {
+        "age": 7,
+        "carrier": "Cellular South",
+        "id": "lg-axis",
+        "imageUrl": "img/phones/lg-axis.0.jpg",
+        "name": "LG Axis",
+        "description": "Android Powered, Google Maps Navigation, 5 Customizable Home Screens",
+        "minPrice": 129.99,
+        "offers": {
+            "price": 229.99,
+            "stock": 10
+        }
+    },
+    {
+        "age": 8,
+        "id": "samsung-galaxy-tab",
+        "imageUrl": "img/phones/samsung-galaxy-tab.0.jpg",
+        "name": "Samsung Galaxy Tab\u2122",
+        "description": "Feel Free to Tab\u2122. The Samsung Galaxy Tab\u2122 brings you an ultra-mobile entertainment experience through its 7\u201d display, high-power processor and Adobe\u00ae Flash\u00ae Player compatibility.",
+        "minPrice": 129.99,
+        "offers": {
+            "price": 229.99,
             "stock": 10
         }
     }

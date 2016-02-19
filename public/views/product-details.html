@@ -1,15 +1,45 @@
-<form>
-    <div class="row">
-        <div class="col-md-9">
-            <img src="/img/horse524.jpg" alt="A horse" style="width:100%;" />
+<div class="container-fluid">
+
+    <form>
+        <div class="row">
+            <div class="col-md-9">
+            <img src="/{{product.images[0]}}" alt="{{product.name}}" class="product" />
+
+                <ul class="product-thumbs">
+                    <li ng-repeat="img in product.images">
+                        <img ng-src="{{img}}" ng-click="setImage(img)" class="img-responsive">
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h1>{{product.name}}</h1>
+                <p><b>&pound; {{product.offers.price}}</b></p>
+                <p><del>&pound; {{product.minPrice}}</del></p>
+                <select>
+                    <option value="">Qty</option>
+                    <option data-ng-repeat="i in [1,2,3,4,5,6,7,8,9,10]">{{i}}</option>
+                </select>
+                <button type="submit" class="btn btn-success btn-sm" value="Add to basket" ng-click="addToBasket(product)">
+                    <i class="fa fa-shopping-cart"></i> Add to Basket
+                </button>
+                <p><p>
+                <p>{{product.description}}</p>
+                <ul class="specs">
+                    <li>
+                        <span>Availability and Networks</span>
+                        <dl>
+                            <dt>Availability</dt>
+                            <dd ng-repeat="availability in product.availability">{{availability}}</dd>
+                        </dl>
+                    </li>
+
+                    <li>
+                        <span>Additional Features</span>
+                        <dd>{{product.additionalFeatures}}</dd>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <div class="col-md-3">
-            <h1>{{product.name}}</h1>
-            <select>
-                <option value="">Qty</option>
-                <option data-ng-repeat="i in [1,2,3,4,5,6,7,8,9,10]">{{i}}</option>
-            </select>
-            <input type="submit" value="Add to basket" ng-click="addToBasket(product)" />
-        </div>
-    </div>
-</form> 
+    </form>
+
+</div>

@@ -1,14 +1,41 @@
-<h1>product list</h1>
-<div class="col-sm-3" data-ng-repeat="i in products">
-    <form>
-        <a href="/product/{{i._id}}">
-            <img src="/img/horse524.jpg" alt="A horse" style="width:100%">
-        </a>
-        <p>{{i.Name}} : {{_id}}</p>
-            <select>
-                <option value="">Qty</option>
-                <option data-ng-repeat="j in [1,2,3,4,5,6,7,8,9,10]">{{j}}</option>
+
+
+<div class="container">
+    <div class="col-sm-3">
+        <div class="form-group">
+            <label for="sel1">Sort by:</label>
+            <select class="form-control" id="sel1" ng-model="orderProp">
+                <option value="name">Name: A to Z</option>
+                <option value="-name">Name: Z to A</option>
+                <option value="offers.price">Price: Low to High</option>
+                <option value="-offers.price">Price: High to Low</option>
             </select>
-            <input type="submit" value="Add to basket" />
-    </form>
-</div> 
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <h1><!--Product List--></h1>
+    <div class="col-sm-3 products" data-ng-repeat="i in products | filter:query | orderBy:orderProp" class="thumbnail">
+            <form>
+                <a href="/product/{{i.id}}" class="thumb">
+                    <img class="img-thumbnail" ng-src="/{{i.imageUrl}}" alt="{{i.name}}" style="width:100%">
+                </a>
+                <p><b>&pound; {{i.offers.price}}</b></p>
+                <p><del>&pound; {{i.minPrice}}</del></p>
+                <p>{{i.name}}</p>
+
+                    <select>
+                        <option value="">Qty</option>
+                        <option data-ng-repeat="j in [1,2,3,4,5,6,7,8,9,10]">{{j}}</option>
+                    </select>
+                    <p></p>
+                    <button type="submit" class="btn btn-success btn-sm" value="Add to basket" ng-click="addToBasket(i)">
+                        <i class="fa fa-shopping-cart"></i> Add to Basket
+                    </button>
+
+            </form>
+    </div>
+</div>
+<!--
+    TODO: add "Customer Rating" (1~5 stars), "Stock Level" (including JSON)
+-->
