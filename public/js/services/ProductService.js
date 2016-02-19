@@ -23,12 +23,6 @@ angular.module('ProductService', []).factory('Products', ['$http',
                     alert("error");
                 });
             }
-           /*,create: function(productData) {
-                return $http.post('/api/products', productData);
-            },
-            delete: function(id) {
-                return $http.delete('/api/products/' + id);
-            }*/
         };
     }
 ]);
