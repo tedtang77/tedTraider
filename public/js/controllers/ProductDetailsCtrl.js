@@ -1,4 +1,3 @@
-/*
 angular.module('ProductDetailsCtrl', []).controller('ProductDetailsController', function($scope, $routeParams, $http, BasketItems) {
     var id = $routeParams.id;
 
@@ -30,9 +29,9 @@ angular.module('ProductDetailsCtrl', []).controller('ProductDetailsController', 
         });
     };
 });
-*/
 
 
+/*
 // TODO: to recover below codes from traider.io later
 angular.module('ProductDetailsCtrl', []).controller('ProductDetailsController', function($scope, $routeParams, Products, BasketItems) {
     var id = $routeParams.id;
@@ -51,3 +50,4 @@ angular.module('ProductDetailsCtrl', []).controller('ProductDetailsController', 
         });
     };
 });
+*/

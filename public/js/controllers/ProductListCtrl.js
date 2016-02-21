@@ -1,4 +1,3 @@
-/*
 angular.module('ProductListCtrl', []).controller('ProductListController', function($scope, $http) {
     var basketService = {};
 
@@ -28,11 +27,12 @@ angular.module('ProductListCtrl', []).controller('ProductListController', functi
     };
 });
 
-*/
 
+/*
 //TODO: to recover below codes from traider.io later
 angular.module('ProductListCtrl', []).controller('ProductListController', function($scope, Products) {
     Products.getAll(function(data) {
         $scope.products = data;
     });
 });
+*/

@@ -13,6 +13,7 @@ angular.module('BasketCtrl', []).controller('BasketController', function($scope,
 });
 */
 
+
 //TODO: to recover below codes from traider.io later
  angular.module('BasketCtrl', []).controller('BasketController', function($scope, BasketItems) {
  BasketItems.getAll(function(data) {
