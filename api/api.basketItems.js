@@ -29,7 +29,7 @@ var addItem = function(req, res) {
         }
 
         var productInfo = {
-            "productId": data._id,
+            "productId": data.id,
             "name": data.name,
             "price": data.offers.price
         };

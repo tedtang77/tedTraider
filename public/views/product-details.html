@@ -3,11 +3,11 @@
     <form>
         <div class="row">
             <div class="col-md-9">
-            <img src="/{{product.images[0]}}" alt="{{product.name}}" class="product" />
+            <img ng-src="/{{mainImageUrl}}" alt="{{product.name}}" class="product" />
 
                 <ul class="product-thumbs">
                     <li ng-repeat="img in product.images">
-                        <img ng-src="{{img}}" ng-click="setImage(img)" class="img-responsive">
+                        <img ng-src="{{img}}" ng-click="setImage(img)">
                     </li>
                 </ul>
             </div>

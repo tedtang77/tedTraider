@@ -13,14 +13,8 @@ angular.module('ProductDetailsCtrl', []).controller('ProductDetailsController', 
     };
 
     $scope.addToBasket = function(product) {
-        var basketService = {};
-        basketService.itemCount = 0;
 
-        basketService.broadcastItemCount = function() {
-            $scope.$broadcast('handleItemCount');
-        };
-
-        BasketItems.addOne(product._id, function(err, data) {
+        BasketItems.addOne(product.id, function(err, data) {
             $scope.$emit('basketUpdate');
             if (err) {
                 alert(err);

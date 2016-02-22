@@ -1,5 +1,4 @@
 angular.module('ProductListCtrl', []).controller('ProductListController', function($scope, $http) {
-    var basketService = {};
 
     $http.get('../../products/products.json').success(function(data) {
         $scope.products = data;
@@ -9,22 +8,6 @@ angular.module('ProductListCtrl', []).controller('ProductListController', functi
 
     $scope.orderProp = 'minPrice';
 
-    $scope.addToBasket = function(product) {
-
-        basketService.itemCount = 0;
-
-        basketService.broadcastItemCount = function() {
-            $scope.$broadcast('handleItemCount');
-        };
-
-        BasketItems.addOne(product._id, function(err, data) {
-            $scope.$emit('basketUpdate');
-            if (err) {
-                alert(err);
-                return;
-            }
-        });
-    };
 });
 
 
