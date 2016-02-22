@@ -13,7 +13,7 @@ angular.module('ProductDetailsCtrl', []).controller('ProductDetailsController', 
     };
 
     $scope.addToBasket = function(product) {
-
+        console.log("Prodcuct Details addToBasket" + product.id);
         BasketItems.addOne(product.id, function(err, data) {
             $scope.$emit('basketUpdate');
             if (err) {
