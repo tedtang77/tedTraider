@@ -30,7 +30,6 @@ angular.module('BasketItemService', []).factory('BasketItems', ['$http', '$rootS
                 url: '/api/basketItems/Add/' + id
             }).success(function(data) {
                 //setItemCount(10);
-                console.log("basketServer.allOne Success" + id);
                 caller.itemCount = data.ItemCount;
                 caller.broadcastItemCount();
                 callback(null, data);

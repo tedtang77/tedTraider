@@ -1,4 +1,4 @@
-var expressSession = require("express-session");
+//var expressSession = require("express-session");
 var requestJson = require("request-json");
 
 module.exports = function attachHandlers(router) { //, passport) {
@@ -8,6 +8,7 @@ module.exports = function attachHandlers(router) { //, passport) {
 };
 
 var list = function(req, res) {
+    alert("BasketItem API list");
 
     var sess = req.session;
     if (sess.products) {
@@ -15,11 +16,14 @@ var list = function(req, res) {
     } else {
         return res.json({});
     }
+
 };
 
 var addItem = function(req, res) {
+    alert("BasketItem API addItem: " + productId);
 
     var productId = req.params.productId;
+
 
     var client = requestJson.createClient('http://127.0.0.1:5000/');
 

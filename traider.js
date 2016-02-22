@@ -15,7 +15,6 @@ createServer = function createServer(){
     server.use(express.static(__dirname + '/public'));
     server.use("/product/*", express.static(__dirname + '/public'));
     server.use("/basket/", express.static(__dirname + '/public'));
-    //server.use("/admin/", express.static(__dirname + '/public/admin'));
 
     server.use(cookieParser);
     server.use(expressSession({
