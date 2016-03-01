@@ -1,4 +1,5 @@
-angular.module('ProductListCtrl', []).controller('ProductListController', function($scope, $http) {
+angular.module('ProductListCtrl', []).controller('ProductListController', ['$scope', '$http', 'Products', 'BasketItems',
+    function($scope, $http, Products, BasketItems) {
 
     $http.get('../../products/products.json').success(function(data) {
         $scope.products = data;
@@ -6,9 +7,18 @@ angular.module('ProductListCtrl', []).controller('ProductListController', functi
         alert("ProductListCtrl error");
     });
 
-    $scope.orderProp = 'minPrice';
+    $scope.orderProp = 'price';
 
-});
+    $scope.addToBasket = function(product) {
+        BasketItems.addOne(product.id, function(err, data) {
+            $scope.$emit('basketUpdate');
+            if (err) {
+                alert(err);
+                return;
+            }
+        });
+    };
+}]);
 
 
 /*

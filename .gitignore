@@ -7,3 +7,5 @@ tmp
 .idea
 .DS_Store
 bower_components/
+test/
+gulpfile.js

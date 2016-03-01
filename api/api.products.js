@@ -1,4 +1,4 @@
-var db = require("../db/db.products.js");
+var db = require("../db/db.products");
 
 // define the routes for /api/users
 module.exports = function attachHandlers(router) { //, passport) {
@@ -6,6 +6,7 @@ module.exports = function attachHandlers(router) { //, passport) {
     router.get('/api/products/seed', seed);
     router.get('/api/products', list);
     router.get('/api/products/:id', view);
+    console.log("product module api.productItems import success");
 };
 
 
@@ -16,7 +17,27 @@ function list(req, res) {
 }
 
 function seed(req, res) {
-    console.log("Seed Input!");
+    db.insert({
+        "id": "motorola-xoom-with-wi-fi",
+        "images": [
+            "img/phones/motorola-xoom-with-wi-fi.0.jpg",
+            "img/phones/motorola-xoom-with-wi-fi.1.jpg",
+            "img/phones/motorola-xoom-with-wi-fi.2.jpg",
+            "img/phones/motorola-xoom-with-wi-fi.3.jpg",
+            "img/phones/motorola-xoom-with-wi-fi.4.jpg",
+            "img/phones/motorola-xoom-with-wi-fi.5.jpg"
+        ],
+        "name": "Motorola XOOM\u2122 with Wi-Fi",
+        "description": "The Next, Next Generation\r\n\r\nExperience the future with Motorola XOOM with Wi-Fi, the world's first tablet powered by Android 3.0 (Honeycomb).",
+        "price": 129.99,
+        "offers": {
+            "price": 229.99,
+            "stock": 10
+        }
+    });
+}
+
+function seedOld(req, res) {
     db.insert({
         "name": "Horse",
         "description": "A lovely horse",

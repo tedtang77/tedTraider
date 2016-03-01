@@ -1,4 +1,4 @@
-var mongoHandler = require("./db.client.js");
+var mongoHandler = require("./db.client");
 var collectionName = "products";
 
 

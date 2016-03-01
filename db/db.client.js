@@ -12,7 +12,7 @@ exports.getDbClient = function() {
 };
 
 exports.dbName = function() {
-    return "traider";
+    return "eshop";
 };
 
 exports.makeObjectID = function(id) {
