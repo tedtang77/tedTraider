@@ -9,7 +9,8 @@ var MongoStore = require('connect-mongo')({
 });
 
 
-createServer = function createServer(){
+
+module.exports = function(){
 
     var server = express();
     //specify middleware
@@ -33,18 +34,6 @@ createServer = function createServer(){
     return server;
 };
 
-
-var server = createServer();
-
-//var routesProductAPI = require('./api/products');
-//var routesBasketAPI = require('./api/basketItems');
-//attachBasketHandlers(server);
-//attachProductHandlers(server);
-
-var port = Number(process.env.PORT || 5000);
-server.listen(port, function(){
-    console.log("Listening on "+ port);
-});
 
 // TODO: to switch into HTTPS protocol instead before production deployment
 // TODO: to add Login

@@ -9,3 +9,4 @@ tmp
 bower_components/
 test/
 gulpfile.js
+archive/

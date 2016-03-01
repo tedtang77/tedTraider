@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Category = require('./category.js');
+var fx = require('./fx');
 
 var productSchema = {
     name: { type: String, required: true },
