@@ -3,8 +3,17 @@ var db = require("../db/db.products");
 // define the routes for /api/users
 module.exports = function attachHandlers(router) { //, passport) {
     // get requests
+
+    // [Replacement by Ted Tang]
+    // api.put('/admin/product/seed',...);
     router.get('/api/products/seed', seed);
+
+    // [Replacement by Ted Tang]
+    // api.get('/products,...);
     router.get('/api/products', list);
+
+    // [Replacement by Ted Tang]
+    // api.get('/product/id/:id',...);
     router.get('/api/products/:id', view);
     console.log("product module api.productItems import success");
 };

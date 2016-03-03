@@ -21,7 +21,7 @@ module.exports = function(wagner) {
     */
 
 
-    // Category API: /category/id/:id
+    // Category API: "/category/id/:id"
     var categoryIdHandler = wagner.invoke(function(Category) {
         return function(req, res) {
             Category.findOne({ _id: req.params.id }, function(error, category) {
@@ -41,7 +41,7 @@ module.exports = function(wagner) {
     });
     api.get('/category/id/:id', categoryIdHandler);
 
-    // Category API: /category/parent/:id
+    // Category API: "/category/parent/:id"
     var categoryParentHandler = wagner.invoke(function(Category) {
         return function(req, res) {
             // 1: ascending; -1: descending
@@ -60,9 +60,7 @@ module.exports = function(wagner) {
     });
     api.get('/category/parent/:id', categoryParentHandler);
 
-
-
-    // Product API: /product/id/:id
+    // Product API: "/product/id/:id"
     var productIdHandler = wagner.invoke(function(Product){
         return function(req, res){
             Product.findOne({ _id : req.params.id },
@@ -71,7 +69,7 @@ module.exports = function(wagner) {
     });
     api.get('/product/id/:id', productIdHandler);
 
-    // Product API: /product/category/:id
+    // Product API: "/product/category/:id"
     var productCategoryHandler = wagner.invoke(function(Product){
         return function(req, res){
             var sort = { name: 1 };
@@ -90,6 +88,85 @@ module.exports = function(wagner) {
         };
     });
     api.get('/product/category/:id', productCategoryHandler);
+
+
+
+    // Product API: /products (added by Ted)
+    var productsListHandler = wagner.invoke(function(Product){
+        return function(req, res){
+            var sort = { name: 1 };
+            if( req.query.price === "1" ) {
+                // 1: ascending
+                sort = {'internal.approximatePriceUSD': 1 };
+            }else if( req.query.price === "-1" ){
+                // -1: descending
+                sort = {'internal.approximatePriceUSD': -1 };
+            }
+
+            Product
+                .find({})
+                .sort(sort)
+                .exec(handleMany.bind(null, 'products', res));
+        };
+    });
+    api.get('/products', productsListHandler);
+
+
+    // Administrative Product API to add seed data: /admin/product/seed (added by Ted)
+    var adminProductSeedHandler = wagner.invoke(function(Product){
+        return function(req, res){
+            var products = [
+                {
+                    name: 'LG G4',
+                    category: { _id: 'Phones', ancestors: ['Electronics', 'Phones'] },
+                    price: {
+                        amount: 300,
+                        currency: 'USD'
+                    }
+                },
+                {
+                    name: 'Asus Zenbook Prime',
+                    category: { _id: 'Laptops', ancestors: ['Electronics', 'Laptops'] },
+                    price: {
+                        amount: 2000,
+                        currency: 'USD'
+                    }
+                },
+                {
+                    name: 'Flying Pigs Farm Pasture Raised Pork Bacon',
+                    category: { _id: 'Bacon', ancestors: ['Bacon'] },
+                    price: {
+                        amount: 20,
+                        currency: 'USD'
+                    }
+                }
+            ];
+            Product.create(products, function(error, docs){
+                if (error) {
+                    return res.
+                    status(status.INTERNAL_SERVER_ERROR).
+                    json({ error: error.toString() });
+                }
+            });
+            return res.json({ products: products });
+        };
+    });
+    api.put('/admin/product/seed', adminProductSeedHandler);
+
+    // Administrative Product API to clean seed data: /admin/product/clean (added by Ted)
+    var adminProductCleanHandler = wagner.invoke(function(Product){
+        return function(req, res){
+            Product.remove({}, function(error){
+                if (error) {
+                    return res.
+                    status(status.INTERNAL_SERVER_ERROR).
+                    json({ error: error.toString() });
+                }
+            });
+            return res.json({});
+        };
+    });
+    api.put('/admin/product/clean', adminProductCleanHandler);
 
 
 

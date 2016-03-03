@@ -2,6 +2,9 @@ var express = require('express'),
     cookieParser = require('cookie-parser'),
     expressSession = require('express-session');
 
+var wagner = require('wagner-core');
+
+require('./db/schema/models')(wagner);
 
 var routes = require('./routes/routes.js');
 
@@ -18,6 +21,13 @@ module.exports = function(){
     server.use(express.static(__dirname + '/public'));
     server.use("/product/*", express.static(__dirname + '/public'));
     server.use("/basket/", express.static(__dirname + '/public'));
+
+    server.use(wagner.invoke(function(User) {
+        return function(req, res, next) {
+            User.findOne({}, function(error, user) { req.user = user; next(); });
+        };
+    }));
+    server.use('/api', require('./api/api')(wagner));
 
     //attach router handlers
     routes.attachHandlers(server);
