@@ -27,3 +27,6 @@ module.exports = new mongoose.Schema({
     }]
   }
 });
+
+module.exports.set('toObject', { virtuals: true });
+module.exports.set('toJSON', { virtuals: true });

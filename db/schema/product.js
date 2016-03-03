@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var Category = require('./category.js');
+var Category = require('./category');
 var fx = require('./fx');
 
 var productSchema = {
@@ -37,15 +37,14 @@ var productSchema = {
     },
     offers: {
         price: {
-            amount: { type: Number, required: true },
+            amount: { type: Number },
             // Only 3 supported currencies for now
             currency: {
                 type: String,
                 enum: ['USD', 'EUR', 'GBP'],
-                required: true
             }
         },
-        stock: { type: Number, required: true }
+        stock: { type: Number }
     }
 };
 
