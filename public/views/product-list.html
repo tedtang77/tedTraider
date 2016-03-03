@@ -7,8 +7,8 @@
             <select class="form-control" id="sel1" ng-model="orderProp">
                 <option value="name">Name: A to Z</option>
                 <option value="-name">Name: Z to A</option>
-                <option value="offers.price">Price: Low to High</option>
-                <option value="-offers.price">Price: High to Low</option>
+                <option value="internal.approximateOfferPriceUSD">Price: Low to High</option>
+                <option value="-internal.approximateOfferPriceUSD">Price: High to Low</option>
             </select>
         </div>
     </div>
@@ -17,13 +17,12 @@
     <h1><!--Product List--></h1>
     <div class="col-sm-3 products" data-ng-repeat="i in products | filter:query | orderBy:orderProp" class="thumbnail">
             <form>
-                <a href="/product/{{i.id}}" class="thumb">
+                <a href="/product/{{i._id}}" class="thumb">
                     <img class="img-thumbnail" ng-src="/{{i.images[0]}}" alt="{{i.name}}" style="width:100%">
                 </a>
-                <p><b>&pound; {{i.offers.price}}</b></p>
-                <p><del>&pound; {{i.price}}</del></p>
-                <p>{{i.name}}</p>
-
+                <p style="width:100%" >{{i.name.slice(0,15)}}</p>
+                <p><b> {{ i.displayOfferPrice }}</b></p>
+                <p><del> {{ i.displayMarketPrice }}</del></p>
                     <select>
                         <option value="">Qty</option>
                         <option data-ng-repeat="j in [1,2,3,4,5,6,7,8,9,10]">{{j}}</option>

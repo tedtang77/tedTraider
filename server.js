@@ -6,7 +6,7 @@ var wagner = require('wagner-core');
 
 require('./db/schema/models')(wagner);
 
-var routes = require('./routes/routes.js');
+//var routes = require('./routes/routes.js');
 
 var MongoStore = require('connect-mongo')({
     session: expressSession
@@ -18,10 +18,6 @@ module.exports = function(){
 
     var server = express();
     //specify middleware
-    server.use(express.static(__dirname + '/public'));
-    server.use("/product/*", express.static(__dirname + '/public'));
-    server.use("/basket/", express.static(__dirname + '/public'));
-
     server.use(wagner.invoke(function(User) {
         return function(req, res, next) {
             User.findOne({}, function(error, user) { req.user = user; next(); });
@@ -29,8 +25,12 @@ module.exports = function(){
     }));
     server.use('/api', require('./api/api')(wagner));
 
+    server.use(express.static(__dirname + '/public'));
+    server.use("/product/*", express.static(__dirname + '/public'));
+    server.use("/basket", express.static(__dirname + '/public'));
+
     //attach router handlers
-    routes.attachHandlers(server);
+    //routes.attachHandlers(server);
 
     server.use(cookieParser);
     server.use(expressSession({

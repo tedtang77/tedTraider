@@ -5,6 +5,7 @@ var status = require('http-status');
 // So instead of writing 404, you just write status.notfound.
 
 
+//module.exports = function (wagner) {
 module.exports = function(wagner) {
 
     var api = express.Router();
@@ -75,10 +76,10 @@ module.exports = function(wagner) {
             var sort = { name: 1 };
             if( req.query.price === "1" ) {
                 // 1: ascending
-                sort = {'internal.approximatePriceUSD': 1 };
+                sort = {'internal.approximateOfferPriceUSD': 1 };
             }else if( req.query.price === "-1" ){
                 // -1: descending
-                sort = {'internal.approximatePriceUSD': -1 };
+                sort = {'internal.approximateOfferPriceUSD': -1 };
             }
 
             Product
@@ -89,18 +90,16 @@ module.exports = function(wagner) {
     });
     api.get('/product/category/:id', productCategoryHandler);
 
-
-
     // Product API: /products (added by Ted)
     var productsListHandler = wagner.invoke(function(Product){
         return function(req, res){
             var sort = { name: 1 };
             if( req.query.price === "1" ) {
                 // 1: ascending
-                sort = {'internal.approximatePriceUSD': 1 };
+                sort = {'internal.approximateOfferPriceUSD': 1 };
             }else if( req.query.price === "-1" ){
                 // -1: descending
-                sort = {'internal.approximatePriceUSD': -1 };
+                sort = {'internal.approximateOfferPriceUSD': -1 };
             }
 
             Product
@@ -119,26 +118,53 @@ module.exports = function(wagner) {
                 {
                     name: 'LG G4',
                     category: { _id: 'Phones', ancestors: ['Electronics', 'Phones'] },
+                    images: [
+                        "img/phones/lg-axis.0.jpg",
+                        "img/phones/lg-axis.1.jpg",
+                        "img/phones/lg-axis.2.jpg"
+                    ],
                     price: {
                         amount: 300,
                         currency: 'USD'
-                    }
+                    },
+                    description: "Android Powered, Google Maps Navigation, 5 Customizable Home Screens",
+                    offerPriceAmount: 259,
+                    stock: 50
                 },
                 {
                     name: 'Asus Zenbook Prime',
                     category: { _id: 'Laptops', ancestors: ['Electronics', 'Laptops'] },
+                    images: [
+                        "img/phones/nexus-s.0.jpg",
+                        "img/phones/nexus-s.1.jpg",
+                        "img/phones/nexus-s.2.jpg",
+                        "img/phones/nexus-s.3.jpg"
+                    ],
                     price: {
                         amount: 2000,
                         currency: 'USD'
-                    }
+                    },
+                    description: "Fast just got faster with Nexus S. A pure Google experience, Nexus S is the first phone to run Gingerbread (Android 2.3), the fastest version of Android yet.",
+                    offerPriceAmount: 1800,
+                    stock: 100
                 },
                 {
                     name: 'Flying Pigs Farm Pasture Raised Pork Bacon',
-                    category: { _id: 'Bacon', ancestors: ['Bacon'] },
+                    category: {_id: 'Bacon', ancestors: ['Bacon']},
+                    images: [
+                        "img/phones/dell-streak-7.0.jpg",
+                        "img/phones/dell-streak-7.1.jpg",
+                        "img/phones/dell-streak-7.2.jpg",
+                        "img/phones/dell-streak-7.3.jpg",
+                        "img/phones/dell-streak-7.4.jpg"
+                    ],
                     price: {
                         amount: 20,
                         currency: 'USD'
-                    }
+                    },
+                    description: "The Next, Next Generation\n\nExperience the future with MOTOROLA XOOM, the world's first tablet powered by Android 3.0 (Honeycomb).",
+                    offerPriceAmount: 15,
+                    stock: 10
                 }
             ];
             Product.create(products, function(error, docs){
@@ -151,7 +177,7 @@ module.exports = function(wagner) {
             return res.json({ products: products });
         };
     });
-    api.put('/admin/product/seed', adminProductSeedHandler);
+    api.get('/admin/product/seed', adminProductSeedHandler);
 
     // Administrative Product API to clean seed data: /admin/product/clean (added by Ted)
     var adminProductCleanHandler = wagner.invoke(function(Product){
@@ -166,7 +192,7 @@ module.exports = function(wagner) {
             return res.json({});
         };
     });
-    api.put('/admin/product/clean', adminProductCleanHandler);
+    api.get('/admin/product/clean', adminProductCleanHandler);
 
 
 

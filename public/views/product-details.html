@@ -13,8 +13,8 @@
             </div>
             <div class="col-md-3">
                 <h1>{{product.name}}</h1>
-                <p><b>&pound; {{product.offers.price}}</b></p>
-                <p><del>&pound; {{product.minPrice}}</del></p>
+                <p><b> {{ product.displayOfferPrice }}</b></p>
+                <p><del> {{ product.displayMarketPrice }}</del></p>
                 <select ng-model="qty">
                     <option value="">Qty</option>
                     <option data-ng-repeat="i in [1,2,3,4,5,6,7,8,9,10]">{{i}}</option>
