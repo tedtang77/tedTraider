@@ -112,8 +112,15 @@ module.exports = function(wagner) {
 
 
     // Administrative Product API to add seed data: /admin/product/seed (added by Ted)
-    var adminProductSeedHandler = wagner.invoke(function(Product){
+    var adminProductSeedHandler = wagner.invoke(function(Product, Category){
         return function(req, res){
+            var categories = [
+                { _id: 'Electronics' },
+                { _id: 'Phones', parent: 'Electronics' },
+                { _id: 'Laptops', parent: 'Electronics' },
+                { _id: 'Bacon' }
+            ];
+
             var products = [
                 {
                     name: 'LG G4',
@@ -167,14 +174,19 @@ module.exports = function(wagner) {
                     stock: 10
                 }
             ];
-            Product.create(products, function(error, docs){
+
+            Category.create(categories, function(error, docs) {
                 if (error) {
-                    return res.
-                    status(status.INTERNAL_SERVER_ERROR).
-                    json({ error: error.toString() });
+                    return res.status(status.INTERNAL_SERVER_ERROR).json({error: error.toString()});
                 }
+                Product.create(products, function (error, docs) {
+                    if (error) {
+                        return res.status(status.INTERNAL_SERVER_ERROR).json({error: error.toString()});
+                    }
+                    return res.json({products: products, categories: categories});
+                });
             });
-            return res.json({ products: products });
+
         };
     });
     api.get('/admin/product/seed', adminProductSeedHandler);

@@ -1,12 +1,16 @@
-angular.module('ProductListCtrl', []).controller('ProductListController', function($scope, Products) {
+angular.module('ProductListCtrl', []).controller('ProductListController', function($scope, Products, BasketItems) {
     Products.getAll(function(data) {
         //$scope.products = data
         $scope.products = data.products;
     });
     $scope.orderProp = 'price';
+    $scope.quantityDict ={};
+
 
     $scope.addToBasket = function(product) {
-        BasketItems.addOne(product.id, function(err, data) {
+        var quantity = $scope.quantityDict[product._id]
+        //alert("addToBasket: {id: " + product._id + "}, { qty:" + quantity + "}");
+        BasketItems.addOne(product._id, quantity, function(err, data) {
             $scope.$emit('basketUpdate');
             if (err) {
                 alert(err);

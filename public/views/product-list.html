@@ -23,11 +23,10 @@
                 <p style="width:100%" >{{i.name.slice(0,15)}}</p>
                 <p><b> {{ i.displayOfferPrice }}</b></p>
                 <p><del> {{ i.displayMarketPrice }}</del></p>
-                    <select>
+                    <select ng-model="quantityDict[i._id]">
                         <option value="">Qty</option>
-                        <option data-ng-repeat="j in [1,2,3,4,5,6,7,8,9,10]">{{j}}</option>
+                        <option data-ng-repeat="j in [1,2,3,4,5,6,7,8,9,10]" value="{{j}}">{{j}}</option>
                     </select>
-                    <p></p>
                     <button type="submit" class="btn btn-success btn-sm" value="Add to basket" ng-click="addToBasket(i)">
                         <i class="fa fa-shopping-cart"></i> Add to Basket
                     </button>

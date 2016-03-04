@@ -1,6 +1,8 @@
 angular.module('ProductDetailsCtrl', []).controller('ProductDetailsController', function($scope, $routeParams, Products, BasketItems) {
     var id = $routeParams.id;
 
+    $scope.quantityDict ={};
+
     Products.getOne(id, function(data) {
         $scope.product = data.product;
         $scope.mainImageUrl = data.product.images[0];
@@ -11,7 +13,9 @@ angular.module('ProductDetailsCtrl', []).controller('ProductDetailsController', 
     };
 
     $scope.addToBasket = function(product) {
-        BasketItems.addOne(product._id, function(err, data) {
+        var quantity = $scope.quantityDict[product._id]
+        //alert("addToBasket: {id: " + product._id + "}, { qty:" + quantity + "}");
+        BasketItems.addOne(product._id, quantity, function(err, data) {
             $scope.$emit('basketUpdate');
             if (err) {
                 alert(err);

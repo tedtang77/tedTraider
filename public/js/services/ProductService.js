@@ -6,7 +6,7 @@ angular.module('ProductService', []).factory('Products', ['$http',
                     method: 'get',
                     url: '/api/products'
                 }).success(function(data) {
-                    console.log(data);
+                    //console.log(data);
                     callback(data);
                 }).error(function() {
                     alert("Product Service getAll error");

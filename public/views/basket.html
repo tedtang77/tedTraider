@@ -9,14 +9,16 @@
                 </tr>
             </thead>
             <tbody>
-                <tr data-ng-repeat="i in products">
-                    <td>{{i.name}}</td>
-                    <td>1</td>
-                    <td>&pound;{{i.price}}</td>
+                <tr data-ng-repeat="p in cart">
+                    <td>{{ p.product.name }}</td>
+                    <td>{{ p.quantity }}</td>
+                    <td>{{ p.product.displayOfferPrice }}</td>
                 </tr>
                 <tr>
-                    <td colspan="2" align="right">Total</td>
-                    <td>&pound;30.00</td>
+                    <!--td colspan="2" align="right">Total</td-->
+                    <td><b>Total</b></td>
+                    <td>{{ totalQuantity }}</td>
+                    <td>{{ currency + '' + totalAmount }}</td>
                 </tr>
             </tbody>
         </table>

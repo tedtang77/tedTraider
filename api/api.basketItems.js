@@ -2,8 +2,12 @@ var expressSession = require("express-session");
 var requestJson = require("request-json");
 
 module.exports = function attachHandlers(router) { //, passport) {
-    // get requests
+    // get requests4x
+    // [Replacement by Ted Tang]
+    // api.put('/me/cart',...);
     router.get('/api/basketItems/Add/:productId', addItem);
+    // [Replacement by Ted Tang]
+    // api.get('/me',...);
     router.get('/api/basketItems/', list);
     console.log("basket module api.basketItems import success");
 };
