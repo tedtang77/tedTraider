@@ -26,9 +26,9 @@ angular.module('BasketItemService', []).factory('BasketItems', ['$http', '$rootS
         };
 
         basketService.addOne = function(id, quantity, callback) {
-            alert("basketService addOne: {id: " + id + "}, { qty:" + quantity + "}");
+            //alert("basketService addOne: {id: " + id + "}, { qty:" + quantity + "}");
             caller = this;
-            $http.put('/api/me/cart', {
+            $http.put('/api/me/cart/add', {
                 data: {
                     cart: [{ product: id, quantity: quantity }]
                 }

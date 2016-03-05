@@ -111,9 +111,20 @@ module.exports = function(wagner) {
     api.get('/products', productsListHandler);
 
 
-    // Administrative Product API to add seed data: /admin/product/seed (added by Ted)
-    var adminProductSeedHandler = wagner.invoke(function(Product, Category){
+    // Administrative API to add seed data: /admin/seed (added by Ted)
+    var adminSeedHandler = wagner.invoke(function(Product, Category, User){
         return function(req, res){
+            var users = [{
+                profile: {
+                    username: 'vkarpov15',
+                    picture: 'http://pbs.twimg.com/profile_images/550304223036854272/Wwmwuh2t.png'
+                },
+                data: {
+                    oauth: 'invalid',
+                    cart: []
+                }
+            }];
+
             var categories = [
                 { _id: 'Electronics' },
                 { _id: 'Phones', parent: 'Electronics' },
@@ -183,28 +194,50 @@ module.exports = function(wagner) {
                     if (error) {
                         return res.status(status.INTERNAL_SERVER_ERROR).json({error: error.toString()});
                     }
-                    return res.json({products: products, categories: categories});
+                    User.create(users, function (error, docs) {
+                        if (error) {
+                            return res.status(status.INTERNAL_SERVER_ERROR).json({error: error.toString()});
+                        }
+                    });
                 });
             });
 
+            return res.json({products: products, categories: categories, users: users});
         };
     });
-    api.get('/admin/product/seed', adminProductSeedHandler);
+    api.get('/admin/seed', adminSeedHandler);
 
-    // Administrative Product API to clean seed data: /admin/product/clean (added by Ted)
-    var adminProductCleanHandler = wagner.invoke(function(Product){
+    // Administrative Product API to clean all seed data: /admin/product/clean (added by Ted)
+    var adminCleanHandler = wagner.invoke(function(Product, Category, User){
         return function(req, res){
+
             Product.remove({}, function(error){
                 if (error) {
                     return res.
                     status(status.INTERNAL_SERVER_ERROR).
                     json({ error: error.toString() });
                 }
+
+                Category.remove({}, function(error){
+                    if (error) {
+                        return res.
+                        status(status.INTERNAL_SERVER_ERROR).
+                        json({ error: error.toString() });
+                    }
+
+                    User.remove({}, function(error){
+                        if (error) {
+                            return res.
+                            status(status.INTERNAL_SERVER_ERROR).
+                            json({ error: error.toString() });
+                        }
+                    });
+                });
             });
             return res.json({});
         };
     });
-    api.get('/admin/product/clean', adminProductCleanHandler);
+    api.get('/admin/clean', adminCleanHandler);
 
 
 
@@ -246,6 +279,30 @@ module.exports = function(wagner) {
         );
 
     });
+
+    // User API: /me/cart/add     add user cart (added by Ted)
+    var meCartAddHandler = wagner.invoke(function(User){
+        return function(req, res){
+            try {
+                var cart = req.body.data.cart;
+            }catch(e){
+                return res
+                    .status(status.BAD_REQUEST)
+                    .json( {error: 'No cart specified!'} );
+            }
+
+            req.user.data.cart = req.user.data.cart.concat(cart);
+            req.user.save(function(error, user){
+                if(error){
+                    return res
+                        .status(status.INTERNAL_SERVER_ERROR)
+                        .json( { error: error.toString()} );
+                }
+                return res.json({ user: user });
+            });
+        }
+    });
+    api.put('/me/cart/add', meCartAddHandler);
 
     return api;
 };
