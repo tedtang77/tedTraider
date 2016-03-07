@@ -1,3 +1,4 @@
+var assert = require('assert');
 var bodyparser = require('body-parser');
 var express = require('express');
 var status = require('http-status');
@@ -291,7 +292,10 @@ module.exports = function(wagner) {
                     .json( {error: 'No cart specified!'} );
             }
 
-            req.user.data.cart = req.user.data.cart.concat(cart);
+
+            //req.user.data.cart = req.user.data.cart.concat(cart);
+            req.user.data.cart = concatCart(req.user.data.cart, cart);
+
             req.user.save(function(error, user){
                 if(error){
                     return res
@@ -336,4 +340,20 @@ function handleMany(property, res, error, result){
     var json = {};
     json[property] = result;
     res.json(json);
+}
+
+function concatCart( userCart , newCartItem ){
+    var done = false;
+    for (var i=0; i < userCart.length; i++){
+        //assert.notEqual(userCart[i].product, newCartItem[0].product);
+        if (userCart[i].product == newCartItem[0].product){
+            userCart[i].quantity = parseInt(userCart[i].quantity) + parseInt(newCartItem[0].quantity);
+            done = true;
+            return userCart;
+        }
+    }
+    if (!done){
+        userCart = userCart.concat(newCartItem);
+    }
+    return userCart;
 }

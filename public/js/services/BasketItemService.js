@@ -33,7 +33,7 @@ angular.module('BasketItemService', []).factory('BasketItems', ['$http', '$rootS
                     cart: [{ product: id, quantity: quantity }]
                 }
             }).success(function(data) {
-                alert("BasketItemService addOne  Success");
+                alert("Shopping Basket Update");
                 //setItemCount(10);
                 //caller.itemCount = data.ItemCount;
                 caller.itemCount += parseInt(quantity);
