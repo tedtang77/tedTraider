@@ -1,4 +1,4 @@
-
+// TODO: to add "Save Basket Items" feature
 angular.module('BasketCtrl', []).controller('BasketController', function($scope, BasketItems) {
     BasketItems.getAll(function(data) {
         //$scope.products = data;
@@ -7,17 +7,23 @@ angular.module('BasketCtrl', []).controller('BasketController', function($scope,
         $scope.totalQuantity = 0;
         $scope.currency = '$';
 
+        $scope.basketOrder = 'quantity';
+
         var currencySymbols = {
             'USD': '$',
             'EUR': '€',
             'GBP': '£'
         };
 
-        for (var i=0; i< $scope.cart.length; i++){
-            $scope.totalQuantity+=$scope.cart[i].quantity;
-            $scope.totalAmount+=parseInt($scope.cart[i].product.offerPriceAmount);
-            $scope.currency= currencySymbols[$scope.cart[i].product.price.currency];
+        //$scope.countTotal();
+        for (var i = 0; i < $scope.cart.length; i++) {
+            $scope.totalQuantity += $scope.cart[i].quantity;
+            $scope.totalAmount += parseFloat($scope.cart[i].product.offerPriceAmount) * parseInt($scope.cart[i].quantity);
+            $scope.currency = currencySymbols[$scope.cart[i].product.price.currency];
         }
+
+        BasketItems.itemCount = $scope.totalQuantity;
+        $scope.basketItemCount = BasketItems.itemCount;
 
         //alert($scope.cart.length);
         /*
@@ -25,19 +31,32 @@ angular.module('BasketCtrl', []).controller('BasketController', function($scope,
         $scope.quantity = data.user.data.cart.quantity;
         */
     });
-    $scope.basketItemCount = 0;
 
-    //$scope.basketItemCount = BasketItems.itemCount;
+    //$scope.basketItemCount = 0;
+
+    $scope.basketItemCount = BasketItems.itemCount;
 
     $scope.$on('handleItemCount', function() {
         $scope.basketItemCount = BasketItems.itemCount;
     });
 
+    $scope.setBasketOrder = function(value){
+        $scope.basketOrder = value;
+    }
+
+    $scope.countTotal = function() {
+        $scope.totalQuantity = 0;
+        $scope.totalAmount = 0
+        for (var i = 0; i < $scope.cart.length; i++) {
+            $scope.totalQuantity += parseInt($scope.cart[i].quantity);
+            $scope.totalAmount += parseFloat($scope.cart[i].product.offerPriceAmount) * parseInt($scope.cart[i].quantity);
+        }
+    }
 });
 
 
 /*
-//TODO: to recover below codes from traider.io later
+
  angular.module('BasketCtrl', []).controller('BasketController', function($scope, BasketItems) {
  BasketItems.getAll(function(data) {
  $scope.products = data;

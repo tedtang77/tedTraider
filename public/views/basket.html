@@ -1,24 +1,56 @@
-<div class="container-fluid">
 
-        <table id="basket-table">
+<div class="container-fluid">
+        <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>Product</th>
-                    <th>Qty</th>
-                    <th>Price</th>
+                    <th>Product
+                        <button type="button" class="btn btn-link btn-sm" ng-click="setBasketOrder('product.name')">
+                            <span class="glyphicon glyphicon-collapse-up"></span>
+                        </button>
+                        <button type="button" class="btn btn-link btn-sm" ng-click="setBasketOrder('-product.name')">
+                            <span class="glyphicon glyphicon-collapse-down"></span>
+                        </button>
+                    </th>
+                    <th>Quantity
+                        <button type="button" class="btn btn-link btn-sm" ng-click="setBasketOrder('quantity')">
+                            <span class="glyphicon glyphicon-collapse-up"></span>
+                        </button>
+                        <button type="button" class="btn btn-link btn-sm" ng-click="setBasketOrder('-quantity')">
+                            <span class="glyphicon glyphicon-collapse-down"></span>
+                        </button>
+                    </th>
+                    <th>Price
+                        <button type="button" class="btn btn-link btn-sm" ng-click="setBasketOrder('product.internal.approximateOfferPriceUSD')">
+                            <span class="glyphicon glyphicon-collapse-up"></span>
+                        </button>
+                        <button type="button" class="btn btn-link btn-sm" ng-click="setBasketOrder('-product.internal.approximateOfferPriceUSD')">
+                            <span class="glyphicon glyphicon-collapse-down"></span>
+                        </button>
+                    </th>
                 </tr>
             </thead>
             <tbody>
-                <tr data-ng-repeat="p in cart">
+                <tr data-ng-repeat="p in cart | orderBy:basketOrder">
                     <td>{{ p.product.name }}</td>
-                    <td>{{ p.quantity }}</td>
+                    <td ng-switch="{{ p.quantity >= 10 }}">
+                        <p ng-switch-when="true">
+                            <input type="number" ng-model="p.quantity" class="input-sm col-xs-2" ng-change="countTotal()" />
+                        </p>
+                        <p ng-switch-default>
+                            <select ng-options="i for i in [1,2,3,4,5,6,7,8,9,10]"
+                                    value = "{{i}}"
+                                    ng-model="p.quantity" class="input-sm"
+                                    ng-change="countTotal()">
+                            </select>
+                        </p>
+                    </td>
                     <td>{{ p.product.displayOfferPrice }}</td>
                 </tr>
                 <tr>
                     <!--td colspan="2" align="right">Total</td-->
-                    <td><b>Total</b></td>
-                    <td>{{ totalQuantity }}</td>
-                    <td>{{ currency + '' + totalAmount }}</td>
+                    <td><b>Total: {{cart.length}} items </b></td>
+                    <td><b>{{ totalQuantity }}</b></td>
+                    <td><b>{{ currency + '' + totalAmount }}</b></td>
                 </tr>
             </tbody>
         </table>

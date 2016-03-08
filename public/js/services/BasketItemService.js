@@ -4,9 +4,11 @@ angular.module('BasketItemService', []).factory('BasketItems', ['$http', '$rootS
 
         basketService.itemCount = 0;
 
+
         basketService.broadcastItemCount = function() {
             $rootScope.$broadcast('handleItemCount');
         };
+
 
 
         basketService.getAll = function(callback) {
@@ -17,7 +19,6 @@ angular.module('BasketItemService', []).factory('BasketItems', ['$http', '$rootS
                 url: '/api/me/'
             }).success(function(data) {
                 //alert("BasketItemService getAll Success");
-                //caller.itemCount = data.length;
                 caller.broadcastItemCount();
                 callback(data);
             }).error(function() {
